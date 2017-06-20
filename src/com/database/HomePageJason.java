@@ -15,7 +15,9 @@ public class HomePageJason {
         String driver = "com.mysql.jdbc.Driver";
 
         // URL指向要访问的数据库名scutcs
-        String url = "jdbc:mysql://127.0.0.1:3306/diting?useUnicode=true&characterEncoding=utf8";
+
+        String url = "jdbc:mysql://127.0.0.1:3306/diting&useUnicode=true&characterEncoding=UTF8";
+
 
         // MySQL配置时的用户名
         String user = "root";
