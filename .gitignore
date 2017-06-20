@@ -1,2 +1,4 @@
 .idea/
 out/
+web/WEB-INF/classes
+artifacts/
