@@ -8,7 +8,9 @@ import java.sql.*;
 class JDBCTest {
 
     public static void main(String[] args){
-    System.out.println(HomePageJason.getData());
+ //   System.out.println(HomePageJason.getData());
+    String s=PasswordHash.Encrypt("12213213", "");
+    System.out.println(s);
     }
 
     public JSONArray resultSetToJson(ResultSet rs) throws SQLException,JSONException
