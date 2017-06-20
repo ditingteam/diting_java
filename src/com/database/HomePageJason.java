@@ -1,5 +1,6 @@
 package com.database;
 
+import com.password.Password;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -14,13 +15,15 @@ public class HomePageJason {
         String driver = "com.mysql.jdbc.Driver";
 
         // URL指向要访问的数据库名scutcs
+
         String url = "jdbc:mysql://127.0.0.1:3306/diting&useUnicode=true&characterEncoding=UTF8";
+
 
         // MySQL配置时的用户名
         String user = "root";
 
         // MySQL配置时的密码
-        String password = "admin";
+        String password = Password.password;
 
         try {
             // 加载驱动程序
@@ -29,8 +32,7 @@ public class HomePageJason {
             // 连续数据库
             Connection conn = DriverManager.getConnection(url, user, password);
 
-            if (!conn.isClosed())
-                System.out.println("Succeeded connecting to the Database!");
+
 
             // statement用来执行SQL语句
             Statement statement = conn.createStatement();// 要执行的SQL语句
