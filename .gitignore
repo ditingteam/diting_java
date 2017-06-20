@@ -2,3 +2,4 @@
 out/
 web/WEB-INF/classes
 artifacts/
+src/com/password/
