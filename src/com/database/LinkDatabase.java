@@ -1,5 +1,6 @@
 package com.database;
 
+import com.password.Password;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -14,13 +15,14 @@ public class LinkDatabase {
         String driver = "com.mysql.jdbc.Driver";
 
         // URL指向要访问的数据库名scutcs
-        String url = "jdbc:mysql://127.0.0.1:3306/diting";
+        String url = "jdbc:mysql://127.0.0.1:3306/diting?useUnicode=true&characterEncoding=UTF8";
 
         // MySQL配置时的用户名
         String user = "root";
 
         // MySQL配置时的密码
-        String password = "admin";
+        // 配置在包com.password.Password类里面，自行建立
+        String password = Password.password;
 
             // 加载驱动程序
         try{Class.forName(driver);
