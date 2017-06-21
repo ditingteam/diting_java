@@ -1,13 +1,16 @@
 <!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1"
+    <script src="js/bootstrap.min.js"></script>
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>播放</title>
     <!-- Bootstrap -->
-    <link href="WEB-INF/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -48,7 +51,7 @@
     <div class="col-lg-8">
         <div class="embed-responsive embed-responsive-16by9">
             <iframe class="embed-responsive-item"
-                    src="http://player.youku.com/player.php/sid/XMjgwNjYyNjEwMA==/v.swf"></iframe>
+                    src="<%=request.getParameter("playAddress")%>"></iframe>
         </div>
     </div>
     <div class="col-lg-3">
@@ -59,10 +62,19 @@
         <div><h1>&nbsp;</h1></div>
         <div><h1>&nbsp;</h1></div>
         <div><h1>&nbsp;</h1></div>
+        <%if (session.getAttribute("login") != null && session.getAttribute("login") == "ok") {%>
+        <form class="navbar-form navbar-left ">
+        <div class="form-group">
+            <input type="text" class="form-control" name="sousuo" placeholder="666666">
+        </div>
+        <button type="submit" class="btn btn-default">发送弹幕</button>
+        </form>
+        <%}else {%>
         <p><h4>登陆后才能发送弹幕！</h4></p>
         <a href="/login">
             <button type="submit" class="btn btn-default">登陆</button>
         </a>
+        <%}%>
     </div>
 </div>
 <div class="row">
@@ -129,12 +141,26 @@
                         <span class="icon-bar"></span>
                     </button>
                 </div>
+                <%if (session.getAttribute("login") != null && session.getAttribute("login") == "ok") {%>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <p><h4>发表评论：</h4></p>
+                    <form class="navbar-form navbar-left ">
+                        <div class="form-group">
+                            <input style="width: 300%" type="text" class="form-control" name="sousuo" placeholder="">
+                            <button type="submit" class="btn btn-default">发表</button>
+                        </div>
+
+                    </form>
+                </div><!--/.nav-collapse -->
+
+                <%}else {%>
                 <div id="navbar" class="navbar-collapse collapse">
                     <p><h4>登陆后才能发表评论！</h4></p>
                     <a href="/login">
                         <button type="submit" class="btn btn-default">登陆</button>
                     </a>
                 </div><!--/.nav-collapse -->
+                <%}%>
             </div>
         </nav>
     </div>

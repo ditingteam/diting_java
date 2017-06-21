@@ -14,6 +14,23 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script>
+        function validate() {
+
+            var pwd = $("#newPassword").val();
+            var pwd1 = $("#newPasswordAgain").val();
+            <!-- 对比两次输入的密码 -->
+            if(pwd == pwd1)
+            {
+                $("#tishi").html("");
+                $("#tishi").css("color","green");
+                $("button").removeAttr("disabled");
+            }
+            else {
+                $("#tishi").html("两次密码不相同");
+                $("#tishi").css("color","red")
+                $("button").attr("disabled","disabled");
+            }
+        }
     </script>
 </head>
 
@@ -33,7 +50,7 @@
                 <div class="form-group">
                     <input type="text" class="form-control" name="sousuo" placeholder="楚乔传">
                 </div>
-                <button type="submit" class="btn btn-default">搜索</button>
+                <button type="submit" class="btn btn-default" action="/search">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/login">登陆</a></li>
@@ -44,7 +61,8 @@
 </nav>
 <div><h1>&nbsp;</h1></div>
 <div><h1>&nbsp;</h1></div>
-<form class="form-horizontal" method="post" role="form">
+
+<form class="form-horizontal" method="post" id="check" role="form">
     <div class="form-group required">
         <label for="inputEmail3" class="col-sm-3 control-label">请输入用户名</label>
         <div class="col-sm-5">
@@ -60,7 +78,8 @@
     <div class="form-group required">
         <label for="inputPassword3" class="col-sm-3 control-label">请确认密码</label>
         <div class="col-sm-5">
-            <input type="password" class="form-control" id="newPasswordAgain" name="mima1" placeholder="Password Again">
+            <input type="password" class="form-control" id="newPasswordAgain" name="mima1" placeholder="Password Again" onkeyup="validate()">
+            <span id="tishi">
         </div>
     </div>
     <div class="col-sm-offset-3 col-sm-5">

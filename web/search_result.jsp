@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% String search = new String( request.getParameter("sousuo").getBytes("ISO-8859-1"),"UTF-8");
+
+    session.setAttribute("search", search);
+%>
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
@@ -11,6 +16,45 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <!-- Bootstrap -->
+    //动态加载剧集列表
+    <script type="text/html" id="tempCol">
+        <div class="col-sm-1">
+            <div class="list-group">
+                <a href="播放链接" style="width: 45px" class="list-group-item active">1</a>
+            </div>
+        </div>
+    </script>
+    <script type="text/javascript">
+        function createCol(j) {
+            var html2 = $("#tempCol")[0].innerHTML
+            var para2 = document.createElement("div")
+            para2.innerHTML = html2
+            var x = $(".episodeCol")
+            x[j].appendChild(para2)
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $.get("/search_data", function (data) {
+                var temp_json = JSON.parse(data)
+                var play_address = "/video_play"
+                //简介加载
+                $("#informationPlay")[0].textContent = temp_json[0].info
+                $("#imgPlay")[0].src = temp_json[0].img
+                $("#namePlay")[0].text = temp_json[0].title
+                $("#imgPlay")[0].parentNode.href = play_address + "?playAddress=" + temp_json[0].links[0]
+                $("#namePlay")[0].href = play_address + "?playAddress=" + temp_json[0].links[0]
+                //加载剧集列表
+                for (var i = 0; i < temp_json[0].links.length - 1; i++)
+                    createCol(0)
+                var playList = $(".list-group-item")
+                for (var i = 0; i < temp_json[0].links.length; i++) {
+                    playList[i].href = play_address + "?playAddress=" + temp_json[0].links[i]
+                    playList[i].textContent = i + 1
+                }
+            })
+        })
+    </script>
     <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -30,7 +74,7 @@
                 <div class="form-group">
                     <input type="text" class="form-control" name="sousuo" placeholder="楚乔传">
                 </div>
-                <button type="submit" class="btn btn-default" >搜索</button>
+                <button type="submit" class="btn btn-default" action="/search">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <%if (session.getAttribute("login") != null && session.getAttribute("login") == "ok") {%>

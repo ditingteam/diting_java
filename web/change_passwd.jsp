@@ -20,6 +20,25 @@
             }
         }
     </script>
+    <script>
+        function validate() {
+
+            var pwd = $("#newPassword").val();
+            var pwd1 = $("#newPasswordAgain").val();
+            <!-- 对比两次输入的密码 -->
+            if(pwd == pwd1)
+            {
+                $("#tishi").html("");
+                $("#tishi").css("color","green");
+                $("button").removeAttr("disabled");
+            }
+            else {
+                $("#tishi").html("两次密码不相同");
+                $("#tishi").css("color","red")
+                $("button").attr("disabled","disabled");
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -38,7 +57,7 @@
                 <div class="form-group">
                     <input type="text" class="form-control" name="sousuo" placeholder="楚乔传">
                 </div>
-                <button type="submit" class="btn btn-default">搜索</button>
+                <button type="submit" class="btn btn-default" action="/search">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/information">个人信息</a></li>
@@ -66,7 +85,8 @@
         <label for="inputPassword3" class="col-sm-3 control-label">请确认新密码</label>
         <div class="col-sm-5">
             <input type="password" class="form-control" id="newPassworldAgain" name="new_password1"
-                    placeholder="Password Again">
+                    placeholder="Password Again" onkeyup="validate()">
+
         </div>
     </div>
     <div class="col-sm-offset-3 col-sm-5">

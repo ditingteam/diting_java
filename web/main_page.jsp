@@ -30,7 +30,7 @@
         $(document).ready(function () {
             $.get("/main_page_data", function (data) {
                 var temp_json = JSON.parse(data)
-                var play_address="/video_play_home_page"
+                var play_address = "/video_play_homepage"
                 //黄金档加载
                 var picture1Array = $("img.picture1")
                 var name1Array = $("a.name1")
@@ -49,7 +49,7 @@
                 var play_timesArray = $("a.play_times")
                 for (var i = 0; i < name2Array.length; i++) {
                     name2Array[i].text = temp_json.热剧榜单[i].name
-                    play_timesArray[i].text = temp_json.热剧榜单[i].paly_times
+                    play_timesArray[i].text = temp_json.热剧榜单[i].play_times
                     name2Array[i].href = play_address + "?playAddress=" + temp_json.热剧榜单[i].link
                     play_timesArray[i].href = play_address + "?playAddress=" + temp_json.热剧榜单[i].link
                 }
@@ -97,7 +97,6 @@
         });
 
     </script>
-
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top">
