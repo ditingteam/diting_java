@@ -2,6 +2,7 @@ package com.database;
 
 import com.password.Password;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.sql.*;
@@ -40,33 +41,27 @@ public class HomePageJason {
             JSONObject json = new JSONObject();//第一个
             String sql = "select * from hotlist";
             ResultSet rs = statement.executeQuery(sql);
-            JDBCTest gx = new JDBCTest();
-            JSONArray hotlist = gx.resultSetToJson(rs);
+            JSONArray hotlist = HomePageJason.resultSetToJson(rs);
             json.put("热剧榜单", hotlist);
             String sql1 = "select * from super_drama";
             ResultSet rs1 = statement.executeQuery(sql1);
-            JDBCTest gx1 = new JDBCTest();
-            JSONArray super_drama = gx1.resultSetToJson(rs1);
+            JSONArray super_drama = HomePageJason.resultSetToJson(rs1);
             json.put("超级网剧", super_drama);
             String sql2 = "select * from exclusiveplanning";
             ResultSet rs2 = statement.executeQuery(sql2);
-            JDBCTest gx2 = new JDBCTest();
-            JSONArray exclusiveplanning = gx2.resultSetToJson(rs2);
+            JSONArray exclusiveplanning = HomePageJason.resultSetToJson(rs2);
             json.put("独家策划", exclusiveplanning);
             String sql3 = "select * from peakviewingtime";// 结果集
             ResultSet rs3 = statement.executeQuery(sql3);
-            JDBCTest gx3 = new JDBCTest();
-            JSONArray peakviewingtime = gx3.resultSetToJson(rs3);
+            JSONArray peakviewingtime = HomePageJason.resultSetToJson(rs3);
             json.put("黄金档", peakviewingtime);
             String sql4 = "select * from exclusive_video_website";// 结果集
             ResultSet rs4 = statement.executeQuery(sql4);
-            JDBCTest gx4 = new JDBCTest();
-            JSONArray exclusive_video_website = gx4.resultSetToJson(rs4);
+            JSONArray exclusive_video_website = HomePageJason.resultSetToJson(rs4);
             json.put("独家视频官网", exclusive_video_website);
             String sql5 = "select * from new_drama_trailer";// 结果集
             ResultSet rs5 = statement.executeQuery(sql5);
-            JDBCTest gx5 = new JDBCTest();
-            JSONArray new_drama_trailer = gx5.resultSetToJson(rs5);
+            JSONArray new_drama_trailer = HomePageJason.resultSetToJson(rs5);
             json.put("新剧预告", new_drama_trailer);
             rs.close();
             rs1.close();
@@ -96,5 +91,30 @@ public class HomePageJason {
             e.printStackTrace();
         }
         return null;
+    }
+    public static JSONArray resultSetToJson(ResultSet rs) throws SQLException,JSONException
+    {
+        // json数组
+        JSONArray array = new JSONArray();
+
+        // 获取列数
+        ResultSetMetaData metaData = rs.getMetaData();
+        int columnCount = metaData.getColumnCount();
+
+        // 遍历ResultSet中的每条数据
+        while (rs.next()) {
+            JSONObject jsonObj = new JSONObject();
+
+            // 遍历每一列
+            for (int i = 1; i <= columnCount; i++) {
+                String columnName =metaData.getColumnLabel(i);
+                String value = rs.getString(columnName);
+                String name = columnName.substring(1);
+                jsonObj.put(name, value);
+            }
+            array.put(jsonObj);
+        }
+
+        return array;
     }
 }
