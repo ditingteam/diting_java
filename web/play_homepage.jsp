@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%System.out.println(request.getParameter("playAddress"));%>
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
@@ -6,21 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <title>播放</title>
-    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
     <!-- Bootstrap -->
-    <link href="WEB-INF/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
 </head>
-<script>
-      $(document).ready(function () {
-          function GetQueryString(name) {
-            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-            var r = window.location.search.substr(1).match(reg);
-            if(r!=null)return  unescape(r[2]); return null;
-          }
-            var sr=$("iframe")
-            sr[0].src=GetQueryString("playAddress")
-      })
-    </script>
 
 <body>
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -60,7 +53,7 @@
     <div class="col-lg-8">
         <div class="embed-responsive embed-responsive-16by9">
             <iframe class="embed-responsive-item"
-                    src=""></iframe>
+                    src="<%=request.getParameter("playAddress")%>"></iframe>
         </div>
     </div>
     <div class="col-lg-3">
@@ -71,10 +64,22 @@
         <div><h1>&nbsp;</h1></div>
         <div><h1>&nbsp;</h1></div>
         <div><h1>&nbsp;</h1></div>
-        <p><h4>登陆后才能发送弹幕！</h4></p>
-        <a href="/login">
-            <button type="submit" class="btn btn-default">登陆</button>
-        </a>
+        <%if (session.getAttribute("login") != null && session.getAttribute("login") == "ok") {%>
+        <form class="navbar-form navbar-left ">
+            <div class="form-group">
+                <input type="text" class="form-control" name="sousuo" placeholder="666666">
+            </div>
+            <button type="submit" class="btn btn-default">发送弹幕</button>
+        </form>
+        <%}else {%>
+        <div id="navbar" class="navbar-collapse collapse">
+            <p><h4>登陆后才能发表评论！</h4></p>
+            <a href="/login">
+                <button type="submit" class="btn btn-default">登陆</button>
+            </a>
+        </div><!--/.nav-collapse -->
+        <%}%>
+
     </div>
 </div>
 <div class="row">
@@ -141,12 +146,27 @@
                         <span class="icon-bar"></span>
                     </button>
                 </div>
+                <%if (session.getAttribute("login") != null && session.getAttribute("login") == "ok") {%>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <p><h4>发表评论：</h4></p>
+                    <form class="navbar-form navbar-left ">
+                        <div class="form-group">
+                            <input style="width: 300%" type="text" class="form-control" name="sousuo" placeholder="">
+                            <button type="submit" class="btn btn-default">发表</button>
+                        </div>
+
+                    </form>
+                </div><!--/.nav-collapse -->
+
+                <%}else {%>
                 <div id="navbar" class="navbar-collapse collapse">
                     <p><h4>登陆后才能发表评论！</h4></p>
                     <a href="/login">
                         <button type="submit" class="btn btn-default">登陆</button>
                     </a>
                 </div><!--/.nav-collapse -->
+                <%}%>
+
             </div>
         </nav>
     </div>

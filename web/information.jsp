@@ -19,19 +19,21 @@
         $(document).ready(function () {
             $.get("/get_information", function (data) {
                 var temp_json = JSON.parse(data)
-                $("#nickname")[0].textContent=temp_json.nickname
-                $("#p_sign")[0].textContent=temp_json.p_sign
-                $("#birthday")[0].textContent=temp_json.birth
-                $("#phone")[0].textContent=temp_json.phone
-                $("#email")[0].textContent=temp_json.email
-                $("#address")[0].textContent=temp_json.address
-                $("#_time")[0].textContent=temp_json.register_time
-                $("#info")[0].textContent=temp_json.introduce
-                $("#username_h")[0].textContent=temp_json.username
-                if(temp_json.sex=="male")
-                    $("#sex")[0].textContent="男"
-                else if(temp_json.sex=="female")
-                    $("#sex")[0].textContent="女"
+                $("#nickname")[0].textContent = temp_json.nickname
+                $("#p_sign")[0].textContent = temp_json.p_sign
+                $("#birthday")[0].textContent = temp_json.birth
+                $("#phone")[0].textContent = temp_json.phone
+                $("#email")[0].textContent = temp_json.email
+                $("#address")[0].textContent = temp_json.address
+                $("#_time")[0].textContent = temp_json.register_time
+                $("#info")[0].textContent = temp_json.introduce
+                $("#username_h")[0].textContent = temp_json.username
+                if (temp_json.sex == "male")
+                    $("#sex")[0].textContent = "男"
+                else if (temp_json.sex == "female")
+                    $("#sex")[0].textContent = "女"
+                else
+                    $("#sex")[0].textContent = " "
             })
         })
     </script>
@@ -52,7 +54,7 @@
                 <div class="form-group">
                     <input type="text" class="form-control" name="sousuo" placeholder="楚乔传">
                 </div>
-                <button type="submit" class="btn btn-default" >搜索</button>
+                <button type="submit" class="btn btn-default" action="/search">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/information">个人信息</a></li>
