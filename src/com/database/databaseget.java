@@ -8,9 +8,31 @@ import java.sql.*;
 class JDBCTest {
 
     public static void main(String[] args){
- //   System.out.println(HomePageJason.getData());
-    String s=PasswordHash.Encrypt("12213213", "");
-    System.out.println(s);
+        String username ;
+        username = UserManage.login("xiaochao666", "a000000");
+        if (username != null)
+            System.out.println("login!");
+        else {
+            System.out.println("login failed");
+        }
+        if (UserManage.changePassword("xiaochao666", "a000000", "a111111")){
+            System.out.println("change!");
+        }
+        else {
+            System.out.println("failed change");
+        }
+        username = UserManage.login("xiaochao666", "a000000");
+        if (username != null)
+            System.out.println("login!");
+        else {
+            System.out.println("login failed");
+        }
+        username = UserManage.login("xiaochao666", "a111111");
+        if (username != null)
+            System.out.println("login!");
+        else {
+            System.out.println("login failed");
+        }
     }
 
     public JSONArray resultSetToJson(ResultSet rs) throws SQLException,JSONException
