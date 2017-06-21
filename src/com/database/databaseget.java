@@ -11,10 +11,8 @@ import java.util.Date;
 
 class JDBCTest {
 
-    public static void main(String[] args){
-
-        System.out.println(UserManage.getInformation("xiaochao666"));
-
+    public static void main(String[] args) {
+        System.out.print(commentManagement.getComment("http://player.youku.com/player.php/sid/XMjgwODY4NzU1Ng==/v.swf"));
     }
 
 
