@@ -86,6 +86,7 @@
         <div class="col-sm-5">
             <input type="password" class="form-control" id="newPassworldAgain" name="new_password1"
                     placeholder="Password Again" onkeyup="validate()">
+
         </div>
     </div>
     <div class="col-sm-offset-3 col-sm-5">

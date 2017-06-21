@@ -37,7 +37,7 @@
         $(document).ready(function () {
             $.get("/search_data", function (data) {
                 var temp_json = JSON.parse(data)
-                var play_address = "/video_play_homepage"
+                var play_address = "/video_play"
                 //简介加载
                 $("#informationPlay")[0].textContent = temp_json[0].info
                 $("#imgPlay")[0].src = temp_json[0].img
