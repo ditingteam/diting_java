@@ -109,8 +109,17 @@ public class HomePageJason {
             for (int i = 1; i <= columnCount; i++) {
                 String columnName =metaData.getColumnLabel(i);
                 String value = rs.getString(columnName);
-                String name = columnName.substring(1);
-                jsonObj.put(name, value);
+                if(columnName.equals("link")) {
+                    jsonObj.put(columnName, value);
+                }
+                else if(columnName.equals("Uname")){
+                    String s="Uname";
+                    String s1 = s.replaceAll("Uname","title");
+                    jsonObj.put(s1,value);
+                }
+                else {
+                    String name = columnName.substring(1);
+                    jsonObj.put(name, value);                }
             }
             array.put(jsonObj);
         }
